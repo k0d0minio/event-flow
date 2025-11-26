@@ -1,38 +1,39 @@
 {
-  "name": "project-name",
+  "name": "event-flow",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "env:pull": "turbo env:pull",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint:check": "biome lint .",
+    "clean": "turbo run clean",
+    "marketing:dev": "turbo run dev --filter=@ef/marketing",
+    "marketing:build": "turbo run build --filter=@ef/marketing",
+    "ui:build": "turbo run build --filter=@ef/ui",
+    "ui:dev": "turbo run dev --filter=@ef/ui",
+    "services:build": "turbo run build --filter=@ef/services",
+    "services:dev": "turbo run dev --filter=@ef/services",
+    "email:dev": "pnpm --filter @ef/services email:dev",
+    "packages:build": "turbo run build --filter=@ef/ui --filter=@ef/services --filter=@ef/db",
+    "packages:dev": "turbo run dev --filter=@ef/ui --filter=@ef/services --filter=@ef/db",
+    "prepare": "husky"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
-    ]
-  },
-  "dependencies": {
-    "next": "16.0.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "@biomejs/biome": "^1.9.4",
+    "depcheck": "^1.4.7",
+    "husky": "^9.1.7",
+    "turbo": "^2.6.1",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@10.18.0"
 }
-
