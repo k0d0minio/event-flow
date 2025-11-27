@@ -50,7 +50,7 @@ export const metadata: Metadata = {
       "Transform your music booking process with AI-powered matching. Connect independent artists with perfect venues using 47+ matching criteria and 90% accuracy predictions.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/placeholder.jpg",
         width: 1200,
         height: 630,
         alt: "Flow Stage - AI-Powered Music Booking Platform",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "Flow Stage | AI-Powered Music Booking Platform",
     description:
       "Transform your music booking process with AI-powered matching. Connect independent artists with perfect venues using 47+ matching criteria.",
-    images: ["/twitter-image.png"],
+    images: ["/placeholder.jpg"],
     creator: "@flowstage",
   },
   robots: {
