@@ -72,7 +72,7 @@ export const ChartStyle = ({
   id: string;
   config: ChartConfig;
 }) => {
-  const colorConfig = Object.entries(config).filter(([, config]) => config.theme || config.color);
+  const colorConfig = Object.entries(config).filter(([, config]: [string, ChartConfig[string]]) => config.theme || config.color);
 
   if (!colorConfig.length) {
     return null;
@@ -84,10 +84,10 @@ export const ChartStyle = ({
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(
-            ([theme, prefix]) => `
+            ([theme, prefix]: [string, string]) => `
 ${prefix} [data-chart=${id}] {
 ${colorConfig
-  .map(([key, itemConfig]) => {
+  .map(([key, itemConfig]: [string, ChartConfig[string]]) => {
     const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
     return color ? `  --color-${key}: ${color};` : null;
   })

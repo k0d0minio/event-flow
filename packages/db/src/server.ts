@@ -7,7 +7,7 @@ import type { Database } from "./types";
  * Creates a Supabase client for use in server components and API routes.
  * Uses environment variables: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
  *
- * @returns Supabase client instance for the kodominio database
+ * @returns Supabase client instance for the Flow Stage database
  */
 export async function createClient(): Promise<SupabaseClient<Database>> {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

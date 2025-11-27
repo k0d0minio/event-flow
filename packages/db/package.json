@@ -25,7 +25,8 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "db:types": "supabase gen types typescript --project-id mccfvufdnlqikkbmthim > src/types.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
@@ -35,6 +36,7 @@
     "next": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "next": "^15.3.0",
     "tsup": "^8.0.0",
     "typescript": "catalog:"

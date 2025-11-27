@@ -1,12 +1,12 @@
 /**
- * @kodo/db - Shared Supabase database connection utilities
+ * @ef/db - Shared Supabase database connection utilities
  *
  * This package provides unified Supabase client utilities for connecting
- * to the kodominio database across all apps in the monorepo.
+ * to the Flow Stage database across all apps in the monorepo.
  *
  * Usage:
- * - Client components: import { createClient } from "@kodo/db/client"
- * - Server components: import { createClient } from "@kodo/db/server"
+ * - Client components: import { createClient } from "@ef/db/client"
+ * - Server components: import { createClient } from "@ef/db/server"
  */
 
 export { createClient } from "./client.js";

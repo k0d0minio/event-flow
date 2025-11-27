@@ -8,7 +8,8 @@
     "incremental": false,
     "declaration": true,
     "declarationMap": true,
-    "lib": ["ES2015", "DOM", "DOM.Iterable"]
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": [
