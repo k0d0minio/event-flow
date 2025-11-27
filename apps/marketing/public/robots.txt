@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flowstage.com/sitemap.xml
+Sitemap: https://ef-marketing.vercel.app/sitemap.xml
 

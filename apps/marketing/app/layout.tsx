@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   generator: "Next.js",
   applicationName: "Flow Stage",
   referrer: "origin-when-cross-origin",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://flowstage.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://ef-marketing.vercel.app"),
   alternates: {
     canonical: "/",
     languages: {
@@ -119,8 +119,8 @@ export default function RootLayout({
     name: "Flow Stage",
     description:
       "AI-powered music booking platform connecting independent artists with perfect venues through intelligent matching algorithms.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://flowstage.com",
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://flowstage.com"}/icon.svg`,
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://ef-marketing.vercel.app",
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://ef-marketing.vercel.app"}/icon.svg`,
     sameAs: [
       "https://twitter.com/flowstage",
       "https://linkedin.com/company/flowstage",
