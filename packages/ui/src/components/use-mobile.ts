@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export const useMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkDevice = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  const checkDevice = useCallback(() => {
+    const mobile = window.innerWidth < 768;
+    setIsMobile((prev) => (prev !== mobile ? mobile : prev));
+  }, []);
 
+  useEffect(() => {
     checkDevice();
     window.addEventListener("resize", checkDevice);
 
     return () => {
       window.removeEventListener("resize", checkDevice);
     };
-  }, []);
+  }, [checkDevice]);
 
   return isMobile;
 };

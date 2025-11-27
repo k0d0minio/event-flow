@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+import Link from "next/link"
 import { createClient } from "@ef/db/server"
 import { Card } from "@ef/ui"
 import { LogoutButton } from "@/components/logout-button"
@@ -36,12 +37,14 @@ export default async function DashboardPage() {
             </p>
           </Card>
 
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-2">Discover Artists</h2>
-            <p className="text-muted-foreground text-sm">
-              Find artists that match your venue style
-            </p>
-          </Card>
+          <Link href="/artists">
+            <Card className="p-6 hover:bg-accent transition-colors cursor-pointer">
+              <h2 className="text-xl font-semibold mb-2">Discover Artists</h2>
+              <p className="text-muted-foreground text-sm">
+                Find artists that match your venue style
+              </p>
+            </Card>
+          </Link>
 
           <Card className="p-6">
             <h2 className="text-xl font-semibold mb-2">Insights</h2>
