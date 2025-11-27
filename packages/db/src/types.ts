@@ -51,24 +51,74 @@ export type Database = {
       }
       profiles: {
         Row: {
+          artist_data: Json | null
           created_at: string
           id: string
           role: string
           updated_at: string
+          venue_data: Json | null
         }
         Insert: {
+          artist_data?: Json | null
           created_at?: string
           id: string
           role: string
           updated_at?: string
+          venue_data?: Json | null
         }
         Update: {
+          artist_data?: Json | null
           created_at?: string
           id?: string
           role?: string
           updated_at?: string
+          venue_data?: Json | null
         }
         Relationships: []
+      }
+      artist_media: {
+        Row: {
+          artist_id: string
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json | null
+          storage_path: string
+          title: string | null
+          type: Database["public"]["Enums"]["media_type"]
+          updated_at: string
+        }
+        Insert: {
+          artist_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          storage_path: string
+          title?: string | null
+          type: Database["public"]["Enums"]["media_type"]
+          updated_at?: string
+        }
+        Update: {
+          artist_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          storage_path?: string
+          title?: string | null
+          type?: Database["public"]["Enums"]["media_type"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "artist_media_artist_id_fkey"
+            columns: ["artist_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       venues: {
         Row: {
@@ -113,7 +163,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      media_type: "audio" | "photo" | "video" | "document"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -240,6 +290,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      media_type: ["audio", "photo", "video", "document"],
+    },
   },
 } as const

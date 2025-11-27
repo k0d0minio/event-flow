@@ -94,10 +94,10 @@ export default async function ArtistsPage() {
                     <TableCell className="whitespace-nowrap">{formatDate(artist.created_at)}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex flex-col sm:flex-row justify-end gap-2">
-                        <Link href={`/artists/${artist.id}/edit`}>
+                        <Link href={`/artists/${artist.id}`}>
                           <Button variant="outline" size="sm" className="w-full sm:w-auto">
                             <Pencil className="w-4 h-4 sm:mr-2" />
-                            <span className="hidden sm:inline">Edit</span>
+                            <span className="hidden sm:inline">View</span>
                           </Button>
                         </Link>
                         <div className="w-full sm:w-auto">

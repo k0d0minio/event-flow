@@ -9,9 +9,10 @@
     "declaration": true,
     "declarationMap": true,
     "lib": ["ES2017", "DOM", "DOM.Iterable"],
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/types/**/*"],
   "exclude": [
     "node_modules",
     "dist",

@@ -53,3 +53,17 @@ export * from "./components/toggle.js";
 export * from "./components/toggle-group.js";
 export * from "./components/tooltip.js";
 export * from "./components/use-mobile.js";
+
+// Artist profile components
+export * from "./components/artist-profile/artist-profile-header.js";
+export * from "./components/artist-profile/artist-identity-view.js";
+export * from "./components/artist-profile/artist-musical-info-view.js";
+export * from "./components/artist-profile/artist-media-view.js";
+export * from "./components/artist-profile/artist-contact-actions.js";
+
+// Venue profile components
+export * from "./components/venue-profile/venue-profile-header.js";
+export * from "./components/venue-profile/venue-identity-view.js";
+export * from "./components/venue-profile/venue-technical-view.js";
+export * from "./components/venue-profile/venue-programming-view.js";
+export * from "./components/venue-profile/venue-services-view.js";
