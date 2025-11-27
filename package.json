@@ -15,6 +15,8 @@
     "clean": "turbo run clean",
     "marketing:dev": "turbo run dev --filter=@ef/marketing",
     "marketing:build": "turbo run build --filter=@ef/marketing",
+    "admin:dev": "turbo run dev --filter=@ef/admin",
+    "admin:build": "turbo run build --filter=@ef/admin",
     "artist:dev": "turbo run dev --filter=@ef/artist",
     "artist:build": "turbo run build --filter=@ef/artist",
     "venue:dev": "turbo run dev --filter=@ef/venue",

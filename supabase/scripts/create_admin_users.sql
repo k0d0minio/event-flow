@@ -1,0 +1,22 @@
+-- Script to create admin users
+-- This script should be run after the admin role migration
+-- Note: Password hashing is handled by Supabase Auth, so users should be created via Supabase Auth API or Dashboard
+-- This is a reference script showing the expected structure
+
+-- The users will be created via Supabase Auth with:
+-- 1. jamie@flowstage.com / FlowStage2025
+-- 2. floriane@flowstage.com / FlowStage2025
+-- 
+-- After users are created in auth.users, their profiles should be updated to have role = 'admin'
+-- 
+-- To update existing profiles to admin role:
+-- UPDATE public.profiles SET role = 'admin' WHERE id IN (
+--   SELECT id FROM auth.users WHERE email IN ('jamie@flowstage.com', 'floriane@flowstage.com')
+-- );
+--
+-- To create profiles for new admin users (if they don't exist):
+-- INSERT INTO public.profiles (id, role)
+-- SELECT id, 'admin' FROM auth.users 
+-- WHERE email IN ('jamie@flowstage.com', 'floriane@flowstage.com')
+-- ON CONFLICT (id) DO UPDATE SET role = 'admin';
+

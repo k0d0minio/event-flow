@@ -6,9 +6,7 @@
       "detail": "Start all applications in development mode with hot reload",
       "type": "shell",
       "command": "pnpm dev",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -27,9 +25,7 @@
       "detail": "Start Marketing application in development mode",
       "type": "shell",
       "command": "pnpm marketing:dev",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -44,13 +40,49 @@
       }
     },
     {
-      "label": "Dev: Finance",
-      "detail": "Start Finance in development mode",
+      "label": "Dev: Admin",
+      "detail": "Start Admin application in development mode",
       "type": "shell",
-      "command": "pnpm finance:dev",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "command": "pnpm admin:dev",
+      "problemMatcher": ["$tsc-watch"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
+    },
+    {
+      "label": "Dev: Artist",
+      "detail": "Start Artist application in development mode",
+      "type": "shell",
+      "command": "pnpm artist:dev",
+      "problemMatcher": ["$tsc-watch"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
+    },
+    {
+      "label": "Dev: Venue",
+      "detail": "Start Venue application in development mode",
+      "type": "shell",
+      "command": "pnpm venue:dev",
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -69,9 +101,7 @@
       "detail": "Start the UI package in development mode",
       "type": "shell",
       "command": "pnpm ui:dev",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -87,9 +117,7 @@
       "detail": "Start the Services package in development mode",
       "type": "shell",
       "command": "pnpm services:dev",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -105,9 +133,7 @@
       "detail": "Start the Email package in development mode",
       "type": "shell",
       "command": "pnpm email:dev",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated",
@@ -123,9 +149,7 @@
       "detail": "Build UI and Services packages for production",
       "type": "shell",
       "command": "pnpm packages:build",
-      "problemMatcher": [
-        "$tsc"
-      ],
+      "problemMatcher": ["$tsc"],
       "presentation": {
         "reveal": "always",
         "panel": "shared",
@@ -141,9 +165,7 @@
       "detail": "Build the UI package for production",
       "type": "shell",
       "command": "pnpm ui:build",
-      "problemMatcher": [
-        "$tsc"
-      ],
+      "problemMatcher": ["$tsc"],
       "presentation": {
         "reveal": "always",
         "panel": "shared",
@@ -159,9 +181,7 @@
       "detail": "Build the Services package for production",
       "type": "shell",
       "command": "pnpm services:build",
-      "problemMatcher": [
-        "$tsc"
-      ],
+      "problemMatcher": ["$tsc"],
       "presentation": {
         "reveal": "always",
         "panel": "shared",
