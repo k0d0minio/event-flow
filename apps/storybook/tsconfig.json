@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": false,
+    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "es6"],
+    "module": "esnext",
+    "moduleResolution": "node16",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "jsx": "preserve"
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mdx", ".storybook/**/*"],
+  "exclude": ["node_modules", ".next", "out", "build", "dist"]
+}

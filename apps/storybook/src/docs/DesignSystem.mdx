@@ -1,0 +1,192 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design System/Overview" />
+
+# Design System Overview
+
+Welcome to the Sustentus Design System. This documentation outlines the foundational styles and design tokens used across all applications in the monorepo.
+
+## Architecture
+
+The design system is built on **Tailwind CSS v4** with a centralized CSS configuration located in `packages/ui/src/globals.css`. This file is pre-compiled and distributed to all applications, ensuring consistency across the marketing site, documentation, and platform.
+
+## Color System
+
+The design system uses the **OKLCH color space** for all color definitions. OKLCH provides:
+
+- **Perceptual uniformity**: Colors appear more consistent to the human eye
+- **Better dark mode**: Easier to create accessible dark mode variations
+- **Wider gamut**: Access to more vibrant colors on modern displays
+
+All colors support both light and dark modes through CSS custom properties.
+
+See the [Colors](/docs/design-system-colors--docs) page for detailed color usage.
+
+## Typography
+
+The design system uses two primary font families:
+
+- **Inter**: For general UI text and content (via `--font-sans`)
+- **Geist Mono**: For code and monospaced content (via `--font-mono`)
+
+Both fonts are loaded via `next/font` for optimal performance and self-hosting.
+
+## Border Radius
+
+The design system provides consistent border radius tokens:
+
+| Token         | Value                       | Usage                                 |
+| ------------- | --------------------------- | ------------------------------------- |
+| `--radius-sm` | `calc(var(--radius) - 4px)` | Small elements, badges                |
+| `--radius-md` | `calc(var(--radius) - 2px)` | Medium elements, inputs               |
+| `--radius-lg` | `var(--radius)`             | Large elements, cards (default: 1rem) |
+| `--radius-xl` | `calc(var(--radius) + 4px)` | Extra large elements, modals          |
+
+Use these via Tailwind classes: `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`
+
+## Border Radius Examples
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+    gap: "1rem",
+    marginTop: "1.5rem",
+  }}
+>
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        backgroundColor: "var(--primary)",
+        height: "80px",
+        borderRadius: "calc(var(--radius) - 4px)",
+        marginBottom: "0.5rem",
+      }}
+    ></div>
+    <code style={{ fontSize: "0.875rem" }}>rounded-sm</code>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        backgroundColor: "var(--primary)",
+        height: "80px",
+        borderRadius: "calc(var(--radius) - 2px)",
+        marginBottom: "0.5rem",
+      }}
+    ></div>
+    <code style={{ fontSize: "0.875rem" }}>rounded-md</code>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        backgroundColor: "var(--primary)",
+        height: "80px",
+        borderRadius: "var(--radius)",
+        marginBottom: "0.5rem",
+      }}
+    ></div>
+    <code style={{ fontSize: "0.875rem" }}>rounded-lg</code>
+  </div>
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        backgroundColor: "var(--primary)",
+        height: "80px",
+        borderRadius: "calc(var(--radius) + 4px)",
+        marginBottom: "0.5rem",
+      }}
+    ></div>
+    <code style={{ fontSize: "0.875rem" }}>rounded-xl</code>
+  </div>
+</div>
+
+## Spacing & Layout
+
+The design system follows Tailwind&apos;s default spacing scale (0.25rem increments). Common patterns:
+
+- **Container padding**: `px-4 md:px-6 lg:px-8`
+- **Section spacing**: `py-12 md:py-16 lg:py-24`
+- **Component gaps**: `gap-4 md:gap-6`
+
+## Animations
+
+The design system includes [tw-animate-css](https://github.com/ben-rogerson/tw-animate-css) for smooth, performant animations:
+
+```tsx
+// Fade in animation
+<div className="animate-in fade-in duration-300">Content</div>
+
+// Slide up animation
+<div className="animate-in slide-in-from-bottom-4 duration-500">Content</div>
+
+// Spin animation (for loading states)
+<div className="animate-spin">⏳</div>
+```
+
+## Dark Mode
+
+Dark mode is implemented using the `.dark` class on a parent element. All color tokens automatically adapt:
+
+```tsx
+import { ThemeProvider } from "next-themes";
+
+<ThemeProvider attribute="class" defaultTheme="system">
+  {children}
+</ThemeProvider>;
+```
+
+Toggle dark mode by adding/removing the `dark` class from the root element.
+
+## Base Styles
+
+Global base styles are applied to all elements:
+
+```css
+* {
+  @apply border-border outline-ring/50;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+```
+
+This ensures:
+
+- Consistent border colors across all bordered elements
+- Accessible focus outlines with 50% opacity ring color
+- Background and text colors adapt to theme
+
+## Usage in Components
+
+All design tokens are available as Tailwind utilities:
+
+```tsx
+// Using color tokens
+<div className="bg-card text-card-foreground border border-border">
+  <h2 className="text-primary">Title</h2>
+  <p className="text-muted-foreground">Description</p>
+</div>
+
+// Using radius tokens
+<button className="rounded-lg">Button</button>
+
+// Using semantic colors
+<div className="bg-destructive text-destructive-foreground">Error</div>
+```
+
+## Customization
+
+To customize the design system:
+
+1. Edit `packages/ui/src/globals.css`
+2. Update CSS custom properties in `:root` and `.dark`
+3. Rebuild the UI package: `pnpm turbo run build --filter=@ef/ui`
+4. Changes propagate to all apps automatically
+
+## Resources
+
+- [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
+- [OKLCH Color Picker](https://oklch.com/)
+- [Radix UI Primitives](https://www.radix-ui.com/)
+- [shadcn/ui Components](https://ui.shadcn.com/)

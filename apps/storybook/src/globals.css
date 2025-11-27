@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "@ef/ui/globals.css";
+
+@source "src/**/*.{js,ts,jsx,tsx,mdx}";

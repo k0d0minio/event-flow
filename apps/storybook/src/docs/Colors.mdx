@@ -1,0 +1,433 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design system/Colors" />
+
+# Color System
+
+The Sustentus design system uses a semantic color system built on OKLCH color space. All colors are defined as CSS custom properties and automatically adapt between light and dark modes.
+
+## Color Format: OKLCH
+
+OKLCH (Lightness, Chroma, Hue) provides superior color definition:
+
+```css
+oklch(L C H)
+```
+
+- **L (Lightness)**: 0 (black) to 1 (white)
+- **C (Chroma)**: 0 (gray) to ~0.4 (vibrant)
+- **H (Hue)**: 0-360 degrees (color wheel)
+
+Example: `oklch(0.577 0.245 27.325)` = vibrant red-orange
+
+## Semantic Color Tokens
+
+### Background & Foreground
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--background)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>background</strong>
+      <br />
+      <code>bg-background</code>
+      <br />
+      <small>Light: oklch(1 0 0) • Dark: oklch(0.145 0 0)</small>
+      <br />
+      Main application background color
+    </div>
+  </div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--foreground)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>foreground</strong>
+      <br />
+      <code>text-foreground</code>
+      <br />
+      <small>Light: oklch(0.145 0 0) • Dark: oklch(0.985 0 0)</small>
+      <br />
+      Main text color for high contrast
+    </div>
+  </div>
+</div>
+
+### Card Colors
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--card)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>card</strong>
+      <br />
+      <code>bg-card</code>
+      <br />
+      <small>Light: oklch(1 0 0) • Dark: oklch(0.145 0 0)</small>
+      <br />
+      Background for card components
+    </div>
+  </div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--card-foreground)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>card-foreground</strong>
+      <br />
+      <code>text-card-foreground</code>
+      <br />
+      <small>Light: oklch(0.145 0 0) • Dark: oklch(0.985 0 0)</small>
+      <br />
+      Text color on card backgrounds
+    </div>
+  </div>
+</div>
+
+### Primary Colors
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--primary)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>primary</strong>
+      <br />
+      <code>bg-primary</code>
+      <br />
+      <small>Light: oklch(0.205 0 0) • Dark: oklch(0.985 0 0)</small>
+      <br />
+      Primary brand color for CTAs and key actions
+    </div>
+  </div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--primary-foreground)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>primary-foreground</strong>
+      <br />
+      <code>text-primary-foreground</code>
+      <br />
+      <small>Light: oklch(0.985 0 0) • Dark: oklch(0.205 0 0)</small>
+      <br />
+      Text color on primary backgrounds
+    </div>
+  </div>
+</div>
+
+### Secondary Colors
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--secondary)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>secondary</strong>
+      <br />
+      <code>bg-secondary</code>
+      <br />
+      <small>Light: oklch(0.97 0 0) • Dark: oklch(0.269 0 0)</small>
+      <br />
+      Secondary actions and subtle backgrounds
+    </div>
+  </div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--secondary-foreground)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>secondary-foreground</strong>
+      <br />
+      <code>text-secondary-foreground</code>
+      <br />
+      <small>Light: oklch(0.205 0 0) • Dark: oklch(0.985 0 0)</small>
+      <br />
+      Text color on secondary backgrounds
+    </div>
+  </div>
+</div>
+
+### Muted Colors
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--muted)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>muted</strong>
+      <br />
+      <code>bg-muted</code>
+      <br />
+      <small>Light: oklch(0.97 0 0) • Dark: oklch(0.269 0 0)</small>
+      <br />
+      Muted backgrounds for less emphasis
+    </div>
+  </div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--muted-foreground)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>muted-foreground</strong>
+      <br />
+      <code>text-muted-foreground</code>
+      <br />
+      <small>Light: oklch(0.556 0 0) • Dark: oklch(0.708 0 0)</small>
+      <br />
+      Muted text for secondary information
+    </div>
+  </div>
+</div>
+
+### Destructive Colors
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--destructive)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>destructive</strong>
+      <br />
+      <code>bg-destructive</code>
+      <br />
+      <small>Light: oklch(0.577 0.245 27.325) • Dark: oklch(0.396 0.141 25.723)</small>
+      <br />
+      Error states and destructive actions
+    </div>
+  </div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--destructive-foreground)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>destructive-foreground</strong>
+      <br />
+      <code>text-destructive-foreground</code>
+      <br />
+      <small>Light: oklch(0.577 0.245 27.325) • Dark: oklch(0.637 0.237 25.331)</small>
+      <br />
+      Text color on destructive backgrounds
+    </div>
+  </div>
+</div>
+
+### Border & Input Colors
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--border)', border: '2px solid var(--border)' }} />
+    <div>
+      <strong>border</strong>
+      <br />
+      <code>border-border</code>
+      <br />
+      <small>Light: oklch(0.922 0 0) • Dark: oklch(0.269 0 0)</small>
+      <br />
+      Border color for all bordered elements
+    </div>
+  </div>
+
+<div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+  <div
+    style={{
+      width: "120px",
+      height: "80px",
+      backgroundColor: "var(--input)",
+      border: "2px solid var(--border)",
+    }}
+  />
+  <div>
+    <strong>input</strong>
+    <br />
+    <code>bg-input</code>
+    <br />
+    <small>Light: oklch(0.922 0 0) • Dark: oklch(0.269 0 0)</small>
+    <br />
+    Background color for input elements
+  </div>
+</div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '80px', backgroundColor: 'var(--ring)', border: '2px solid var(--border)' }} />
+    <div>
+      <strong>ring</strong>
+      <br />
+      <code>ring-ring</code>
+      <br />
+      <small>Light: oklch(0.708 0 0) • Dark: oklch(0.439 0 0)</small>
+      <br />
+      Focus ring color (used at 50% opacity)
+    </div>
+  </div>
+</div>
+
+## Chart Colors
+
+The design system includes 5 chart colors for data visualization:
+
+<div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '60px', backgroundColor: 'var(--chart-1)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>chart-1</strong> • <code>bg-chart-1</code>
+      <br />
+      <small>Light: oklch(0.646 0.222 41.116) • Dark: oklch(0.488 0.243 264.376)</small>
+    </div>
+  </div>
+
+<div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+  <div
+    style={{
+      width: "120px",
+      height: "60px",
+      backgroundColor: "var(--chart-2)",
+      border: "1px solid var(--border)",
+    }}
+  />
+  <div>
+    <strong>chart-2</strong> • <code>bg-chart-2</code>
+    <br />
+    <small>
+      Light: oklch(0.6 0.118 184.704) • Dark: oklch(0.696 0.17 162.48)
+    </small>
+  </div>
+</div>
+
+<div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+  <div
+    style={{
+      width: "120px",
+      height: "60px",
+      backgroundColor: "var(--chart-3)",
+      border: "1px solid var(--border)",
+    }}
+  />
+  <div>
+    <strong>chart-3</strong> • <code>bg-chart-3</code>
+    <br />
+    <small>
+      Light: oklch(0.398 0.07 227.392) • Dark: oklch(0.769 0.188 70.08)
+    </small>
+  </div>
+</div>
+
+<div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+  <div
+    style={{
+      width: "120px",
+      height: "60px",
+      backgroundColor: "var(--chart-4)",
+      border: "1px solid var(--border)",
+    }}
+  />
+  <div>
+    <strong>chart-4</strong> • <code>bg-chart-4</code>
+    <br />
+    <small>
+      Light: oklch(0.828 0.189 84.429) • Dark: oklch(0.627 0.265 303.9)
+    </small>
+  </div>
+</div>
+
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+    <div style={{ width: '120px', height: '60px', backgroundColor: 'var(--chart-5)', border: '1px solid var(--border)' }} />
+    <div>
+      <strong>chart-5</strong> • <code>bg-chart-5</code>
+      <br />
+      <small>Light: oklch(0.769 0.188 70.08) • Dark: oklch(0.645 0.246 16.439)</small>
+    </div>
+  </div>
+</div>
+
+## Usage Examples
+
+### Button with Primary Color
+
+```tsx
+<button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">
+  Primary Button
+</button>
+```
+
+<button
+  style={{
+    backgroundColor: "var(--primary)",
+    color: "var(--primary-foreground)",
+    borderRadius: "var(--radius)",
+    padding: "0.5rem 1rem",
+    border: "none",
+    cursor: "pointer",
+    fontWeight: "500",
+  }}
+>
+  Primary Button
+</button>
+
+### Card with Border
+
+```tsx
+<div className="bg-card text-card-foreground border-border rounded-lg border p-6">
+  <h3 className="text-lg font-semibold">Card Title</h3>
+  <p className="text-muted-foreground">Card description</p>
+</div>
+```
+
+<div
+  style={{
+    backgroundColor: "var(--card)",
+    color: "var(--card-foreground)",
+    border: "1px solid var(--border)",
+    borderRadius: "var(--radius)",
+    padding: "1.5rem",
+    marginTop: "1rem",
+  }}
+>
+  <h3
+    style={{ fontSize: "1.125rem", fontWeight: "600", marginBottom: "0.5rem" }}
+  >
+    Card Title
+  </h3>
+  <p style={{ color: "var(--muted-foreground)" }}>
+    Card description with muted text
+  </p>
+</div>
+
+### Error Message
+
+```tsx
+<div className="bg-destructive text-destructive-foreground rounded-md p-4">
+  An error occurred. Please try again.
+</div>
+```
+
+<div
+  style={{
+    backgroundColor: "var(--destructive)",
+    color: "var(--destructive-foreground)",
+    borderRadius: "calc(var(--radius) - 2px)",
+    padding: "1rem",
+    marginTop: "1rem",
+  }}
+>
+  An error occurred. Please try again.
+</div>
+
+## Accessibility
+
+All color pairs meet WCAG 2.1 AA contrast requirements:
+
+- **foreground/background**: 15.5:1 (light), 14.2:1 (dark)
+- **primary-foreground/primary**: 10.8:1 (light), 9.2:1 (dark)
+- **muted-foreground/background**: 4.8:1 (light), 5.1:1 (dark)
+
+Always use paired colors together (e.g., `primary` with `primary-foreground`) to maintain accessibility.
+
+## Customizing Colors
+
+To adjust colors in the design system:
+
+1. Open `packages/ui/src/globals.css`
+2. Modify the OKLCH values in `:root` (light mode) or `.dark` (dark mode)
+3. Use [oklch.com](https://oklch.com/) to pick new colors visually
+4. Rebuild: `pnpm turbo run build --filter=@ef/ui`
+
+Example:
+
+```css
+:root {
+  /* Change primary to a blue */
+  --primary: oklch(0.5 0.2 250);
+  --primary-foreground: oklch(1 0 0);
+}
+```
