@@ -97,10 +97,10 @@
       }
     },
     {
-      "label": "Dev: UI Package",
-      "detail": "Start the UI package in development mode",
+      "label": "Dev: Storybook",
+      "detail": "Start Storybook application in development mode",
       "type": "shell",
-      "command": "pnpm ui:dev",
+      "command": "pnpm storybook:dev",
       "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
@@ -110,13 +110,16 @@
       "group": {
         "kind": "build",
         "isDefault": false
+      },
+      "runOptions": {
+        "runOn": "default"
       }
     },
     {
-      "label": "Dev: Services Package",
-      "detail": "Start the Services package in development mode",
+      "label": "Dev: Booker",
+      "detail": "Start Booker application in development mode",
       "type": "shell",
-      "command": "pnpm services:dev",
+      "command": "pnpm booker:dev",
       "problemMatcher": ["$tsc-watch"],
       "presentation": {
         "reveal": "always",
@@ -126,6 +129,9 @@
       "group": {
         "kind": "build",
         "isDefault": false
+      },
+      "runOptions": {
+        "runOn": "default"
       }
     },
     {
@@ -149,38 +155,6 @@
       "detail": "Build UI and Services packages for production",
       "type": "shell",
       "command": "pnpm packages:build",
-      "problemMatcher": ["$tsc"],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "focus": false
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-    },
-    {
-      "label": "Build: UI Package",
-      "detail": "Build the UI package for production",
-      "type": "shell",
-      "command": "pnpm ui:build",
-      "problemMatcher": ["$tsc"],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "focus": false
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-    },
-    {
-      "label": "Build: Services Package",
-      "detail": "Build the Services package for production",
-      "type": "shell",
-      "command": "pnpm services:build",
       "problemMatcher": ["$tsc"],
       "presentation": {
         "reveal": "always",

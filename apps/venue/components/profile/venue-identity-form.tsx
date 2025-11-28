@@ -20,6 +20,7 @@ import {
   SelectValue,
   Textarea,
   Checkbox,
+  LocationMap,
 } from "@ef/ui"
 import { ProfileSection } from "./profile-section"
 import { toast } from "sonner"
@@ -344,59 +345,27 @@ export function VenueIdentityForm({ initialData, onUpdate }: VenueIdentityFormPr
             <h3 className="font-medium">Location</h3>
             <FormField
               control={form.control}
-              name="location.address"
-              render={({ field }) => (
+              name="location"
+              render={() => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>Venue Location</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Enter full address" {...field} />
+                    <LocationMap
+                      apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
+                      address={form.watch("location.address")}
+                      coordinates={form.watch("location.coordinates")}
+                      onAddressChange={(address) => {
+                        form.setValue("location.address", address)
+                      }}
+                      onCoordinatesChange={(coordinates) => {
+                        form.setValue("location.coordinates", coordinates)
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="location.coordinates.lat"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Latitude</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        step="any"
-                        placeholder="0.000000"
-                        {...field}
-                        onChange={(e) => field.onChange(e.target.value ? parseFloat(e.target.value) : undefined)}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="location.coordinates.lng"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Longitude</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        step="any"
-                        placeholder="0.000000"
-                        {...field}
-                        onChange={(e) => field.onChange(e.target.value ? parseFloat(e.target.value) : undefined)}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
 
             <FormField
               control={form.control}

@@ -67,3 +67,13 @@ export * from "./components/venue-profile/venue-identity-view.js";
 export * from "./components/venue-profile/venue-technical-view.js";
 export * from "./components/venue-profile/venue-programming-view.js";
 export * from "./components/venue-profile/venue-services-view.js";
+export * from "./components/venue-profile/location-map.js";
+
+// Layout components
+export * from "./components/layout/page-container.js";
+export * from "./components/layout/page-header.js";
+export * from "./components/layout/dashboard-layout.js";
+
+// Navigation components
+export * from "./components/navigation/nav-link.js";
+export * from "./components/navigation/app-nav.js";

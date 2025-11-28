@@ -1,5 +1,6 @@
 import { Badge } from "../badge.js"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../card.js"
+import { LocationMap } from "./location-map.js"
 
 interface VenueIdentityViewProps {
   venueName?: string | null
@@ -15,6 +16,7 @@ interface VenueIdentityViewProps {
   } | null
   history?: string | null
   ambiance?: string[] | null
+  googleMapsApiKey?: string
 }
 
 const venueTypeLabels: Record<string, string> = {
@@ -34,6 +36,7 @@ export function VenueIdentityView({
   location,
   history,
   ambiance,
+  googleMapsApiKey,
 }: VenueIdentityViewProps) {
   return (
     <Card>
@@ -99,10 +102,19 @@ export function VenueIdentityView({
 
             {location.coordinates && (location.coordinates.lat || location.coordinates.lng) && (
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Coordinates</p>
-                <p>
+                <p className="text-sm font-medium text-muted-foreground mb-2">Coordinates</p>
+                <p className="mb-4">
                   {location.coordinates.lat?.toFixed(6)}, {location.coordinates.lng?.toFixed(6)}
                 </p>
+                {googleMapsApiKey && (
+                  <LocationMap
+                    apiKey={googleMapsApiKey}
+                    address={location.address}
+                    coordinates={location.coordinates}
+                    readonly
+                    height="300px"
+                  />
+                )}
               </div>
             )}
 

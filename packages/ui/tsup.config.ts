@@ -9,7 +9,7 @@ export default defineConfig({
   minify: false,
   target: "es2022",
   outDir: "dist",
-  external: ["react", "react-dom", "@ef/ui", "@ef/db/client"],
+  external: ["react", "react-dom", "@ef/ui", "@ef/db/client", "next/link", "next/navigation"],
   banner: {
     js: '"use client";',
   },

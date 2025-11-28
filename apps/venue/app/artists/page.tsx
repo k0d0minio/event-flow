@@ -51,7 +51,7 @@ export default async function ArtistsPage() {
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">Discover Artists</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Discover Artists</h1>
           <p className="text-muted-foreground mt-2">
             Browse and discover artists for your venue
           </p>
