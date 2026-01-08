@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { email, password, display_name, bio, genre } = body
+    const { email, password, stage_name, bio_short, primary_genre } = body
 
     if (!email || !password) {
       return NextResponse.json(
@@ -77,6 +77,7 @@ export async function POST(request: NextRequest) {
       .upsert({
         id: newUser.user.id,
         role: "artist",
+        email: email,
       }, {
         onConflict: "id",
       })
@@ -88,10 +89,10 @@ export async function POST(request: NextRequest) {
 
     // Create artist record
     const { error: artistError } = await supabaseAdmin.from("artists").insert({
-      id: newUser.user.id,
-      display_name: display_name || null,
-      bio: bio || null,
-      genre: genre || null,
+      profile_id: newUser.user.id,
+      stage_name: stage_name || null,
+      bio_short: bio_short || null,
+      primary_genre: primary_genre || null,
     })
 
     if (artistError) {
@@ -110,4 +111,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-

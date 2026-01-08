@@ -28,11 +28,22 @@ export async function DELETE(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
+    // Get venue record
+    const { data: venue } = await supabase
+      .from("venues")
+      .select("id")
+      .eq("profile_id", id)
+      .single()
+
+    if (!venue) {
+      return NextResponse.json({ error: "Venue not found" }, { status: 404 })
+    }
+
     // Delete venue record (cascade will handle related records if configured)
     const { error: venueError } = await supabase
       .from("venues")
       .delete()
-      .eq("id", id)
+      .eq("id", venue.id)
 
     if (venueError) {
       return NextResponse.json(
@@ -50,4 +61,3 @@ export async function DELETE(
     )
   }
 }
-

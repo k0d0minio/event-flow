@@ -29,24 +29,35 @@ export async function PUT(
     }
 
     const body = await request.json()
-    const { name, address, capacity } = body
+    const { venue_name, capacity_min, capacity_max } = body
 
-    if (!name) {
+    if (!venue_name) {
       return NextResponse.json(
-        { error: "Name is required" },
+        { error: "Venue name is required" },
         { status: 400 }
       )
+    }
+
+    // Get venue record
+    const { data: venue } = await supabase
+      .from("venues")
+      .select("id")
+      .eq("profile_id", id)
+      .single()
+
+    if (!venue) {
+      return NextResponse.json({ error: "Venue not found" }, { status: 404 })
     }
 
     // Update venue record
     const { error: venueError } = await supabase
       .from("venues")
       .update({
-        name,
-        address: address || null,
-        capacity: capacity || null,
+        venue_name: venue_name,
+        capacity_min: capacity_min || null,
+        capacity_max: capacity_max || null,
       })
-      .eq("id", id)
+      .eq("id", venue.id)
 
     if (venueError) {
       return NextResponse.json(
@@ -64,4 +75,3 @@ export async function PUT(
     )
   }
 }
-

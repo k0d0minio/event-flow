@@ -41,7 +41,7 @@ export default async function ArtistViewPage({
   // Fetch artist profile data
   const { data: artistProfile } = await supabase
     .from("profiles")
-    .select("id, role, artist_data, created_at, updated_at")
+    .select("id, role, created_at, updated_at")
     .eq("id", id)
     .eq("role", "artist")
     .single()
@@ -56,25 +56,52 @@ export default async function ArtistViewPage({
     )
   }
 
-  const { data: artist } = await supabase.from("artists").select("*").eq("id", id).single()
-
-  const { data: media } = await supabase
-    .from("artist_media")
+  // Fetch artist record
+  const { data: artist } = await supabase
+    .from("artists")
     .select("*")
-    .eq("artist_id", id)
+    .eq("profile_id", id)
+    .single()
+
+  if (!artist) {
+    return (
+      <div className="min-h-screen bg-background p-8">
+        <div className="max-w-7xl mx-auto">
+          <p>Artist data not found</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Fetch genres and influences
+  const { data: genres } = await supabase
+    .from("artist_genres")
+    .select("genre")
+    .eq("artist_id", artist.id)
+
+  const { data: influences } = await supabase
+    .from("artist_influences")
+    .select("influence")
+    .eq("artist_id", artist.id)
+
+  // Fetch media
+  const { data: media } = await supabase
+    .from("media")
+    .select("*")
+    .eq("entity_type", "artist")
+    .eq("entity_id", artist.id)
     .order("created_at", { ascending: false })
 
   // Calculate completion
-  const artistData = (artistProfile.artist_data as Record<string, unknown>) || {}
   const fields = {
-    stage_name: artistData.stage_name,
-    formation_type: artistData.formation_type,
-    bio_short: artistData.bio_short,
-    years_active: artistData.years_active,
-    professional_level: artistData.professional_level,
-    primary_genre: artistData.primary_genre,
-    sub_genres: artistData.sub_genres,
-    influences: artistData.influences,
+    stage_name: artist.stage_name,
+    formation_type: artist.formation_type,
+    bio_short: artist.bio_short,
+    years_active: artist.years_active,
+    professional_level: artist.professional_level,
+    primary_genre: artist.primary_genre,
+    sub_genres: genres && genres.length > 0,
+    influences: influences && influences.length > 0,
   }
 
   let filledCount = 0
@@ -82,8 +109,8 @@ export default async function ArtistViewPage({
 
   for (const value of Object.values(fields)) {
     if (value !== null && value !== undefined) {
-      if (Array.isArray(value)) {
-        if (value.length > 0) filledCount++
+      if (typeof value === "boolean") {
+        if (value) filledCount++
       } else if (typeof value === "string") {
         if (value.trim().length > 0) filledCount++
       } else {
@@ -92,10 +119,10 @@ export default async function ArtistViewPage({
     }
   }
 
-  const hasAudio = media?.some((m) => m.type === "audio")
-  const hasPhoto = media?.some((m) => m.type === "photo")
-  const hasVideo = media?.some((m) => m.type === "video")
-  const hasDocument = media?.some((m) => m.type === "document")
+  const hasAudio = media?.some((m) => m.media_type === "audio")
+  const hasPhoto = media?.some((m) => m.media_type === "photo")
+  const hasVideo = media?.some((m) => m.media_type === "video")
+  const hasDocument = media?.some((m) => m.media_type === "document")
 
   if (hasAudio) filledCount++
   if (hasPhoto) filledCount++
@@ -124,33 +151,33 @@ export default async function ArtistViewPage({
         </div>
 
         <ArtistProfileHeader
-          stageName={artistData.stage_name as string | null | undefined}
-          formationType={artistData.formation_type as string | null | undefined}
-          professionalLevel={artistData.professional_level as string | null | undefined}
+          stageName={artist.stage_name}
+          formationType={artist.formation_type}
+          professionalLevel={artist.professional_level}
           completionPercentage={completionPercentage}
         />
 
         <div className="grid gap-6 md:grid-cols-2">
           <ArtistIdentityView
-            stageName={artistData.stage_name as string | null | undefined}
-            formationType={artistData.formation_type as string | null | undefined}
-            bioShort={artistData.bio_short as string | null | undefined}
-            bioLong={artistData.bio_long as string | null | undefined}
-            yearsActive={artistData.years_active as number | null | undefined}
-            professionalLevel={artistData.professional_level as string | null | undefined}
+            stageName={artist.stage_name}
+            formationType={artist.formation_type}
+            bioShort={artist.bio_short}
+            bioLong={artist.bio_long}
+            yearsActive={artist.years_active}
+            professionalLevel={artist.professional_level}
           />
 
           <ArtistMusicalInfoView
-            primaryGenre={artistData.primary_genre as string | null | undefined}
-            subGenres={artistData.sub_genres as string[] | null | undefined}
-            influences={artistData.influences as string[] | null | undefined}
+            primaryGenre={artist.primary_genre}
+            subGenres={genres?.map((g) => g.genre) || []}
+            influences={influences?.map((i) => i.influence) || []}
           />
         </div>
 
         <ArtistMediaView 
           media={(media || []) as Array<{
             id: string
-            type: "audio" | "photo" | "video" | "document"
+            media_type: "audio" | "photo" | "video" | "document"
             title: string | null
             storage_path: string
             metadata: Record<string, unknown> | null

@@ -27,11 +27,11 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { email, password, name, address, capacity } = body
+    const { email, password, venue_name, address, capacity_min, capacity_max } = body
 
-    if (!email || !password || !name) {
+    if (!email || !password || !venue_name) {
       return NextResponse.json(
-        { error: "Email, password, and name are required" },
+        { error: "Email, password, and venue name are required" },
         { status: 400 }
       )
     }
@@ -77,6 +77,7 @@ export async function POST(request: NextRequest) {
       .upsert({
         id: newUser.user.id,
         role: "venue",
+        email: email,
       }, {
         onConflict: "id",
       })
@@ -87,10 +88,10 @@ export async function POST(request: NextRequest) {
 
     // Create venue record
     const { error: venueError } = await supabaseAdmin.from("venues").insert({
-      id: newUser.user.id,
-      name,
-      address: address || null,
-      capacity: capacity || null,
+      profile_id: newUser.user.id,
+      venue_name: venue_name,
+      capacity_min: capacity_min || null,
+      capacity_max: capacity_max || null,
     })
 
     if (venueError) {
@@ -98,6 +99,14 @@ export async function POST(request: NextRequest) {
         { error: venueError.message || "Failed to create venue record" },
         { status: 400 }
       )
+    }
+
+    // Create location if address provided
+    if (address) {
+      await supabaseAdmin.from("venue_locations").insert({
+        venue_id: (await supabaseAdmin.from("venues").select("id").eq("profile_id", newUser.user.id).single()).data?.id,
+        address: address,
+      })
     }
 
     return NextResponse.json({ success: true, id: newUser.user.id })
@@ -109,4 +118,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-

@@ -28,10 +28,10 @@ export async function GET(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
-    // Fetch profile with artist_data
+    // Fetch profile
     const { data: artistProfile, error: profileError } = await supabase
       .from("profiles")
-      .select("id, role, artist_data, created_at, updated_at")
+      .select("id, role, email, created_at, updated_at")
       .eq("id", id)
       .eq("role", "artist")
       .single()
@@ -44,31 +44,42 @@ export async function GET(
     const { data: artist, error: artistError } = await supabase
       .from("artists")
       .select("*")
-      .eq("id", id)
+      .eq("profile_id", id)
       .single()
 
-    if (artistError) {
+    if (artistError || !artist) {
       return NextResponse.json({ error: "Artist data not found" }, { status: 404 })
     }
 
+    // Fetch genres and influences
+    const { data: genres } = await supabase
+      .from("artist_genres")
+      .select("genre")
+      .eq("artist_id", artist.id)
+
+    const { data: influences } = await supabase
+      .from("artist_influences")
+      .select("influence")
+      .eq("artist_id", artist.id)
+
     // Fetch media
     const { data: media, error: mediaError } = await supabase
-      .from("artist_media")
+      .from("media")
       .select("*")
-      .eq("artist_id", id)
+      .eq("entity_type", "artist")
+      .eq("entity_id", artist.id)
       .order("created_at", { ascending: false })
 
     // Calculate completion status
-    const artistData = (artistProfile.artist_data as Record<string, unknown>) || {}
     const fields = {
-      stage_name: artistData.stage_name,
-      formation_type: artistData.formation_type,
-      bio_short: artistData.bio_short,
-      years_active: artistData.years_active,
-      professional_level: artistData.professional_level,
-      primary_genre: artistData.primary_genre,
-      sub_genres: artistData.sub_genres,
-      influences: artistData.influences,
+      stage_name: artist.stage_name,
+      formation_type: artist.formation_type,
+      bio_short: artist.bio_short,
+      years_active: artist.years_active,
+      professional_level: artist.professional_level,
+      primary_genre: artist.primary_genre,
+      sub_genres: genres && genres.length > 0,
+      influences: influences && influences.length > 0,
     }
 
     let filledCount = 0
@@ -76,8 +87,8 @@ export async function GET(
 
     for (const value of Object.values(fields)) {
       if (value !== null && value !== undefined) {
-        if (Array.isArray(value)) {
-          if (value.length > 0) filledCount++
+        if (typeof value === "boolean") {
+          if (value) filledCount++
         } else if (typeof value === "string") {
           if (value.trim().length > 0) filledCount++
         } else {
@@ -86,10 +97,10 @@ export async function GET(
       }
     }
 
-    const hasAudio = media?.some((m) => m.type === "audio")
-    const hasPhoto = media?.some((m) => m.type === "photo")
-    const hasVideo = media?.some((m) => m.type === "video")
-    const hasDocument = media?.some((m) => m.type === "document")
+    const hasAudio = media?.some((m) => m.media_type === "audio")
+    const hasPhoto = media?.some((m) => m.media_type === "photo")
+    const hasVideo = media?.some((m) => m.media_type === "video")
+    const hasDocument = media?.some((m) => m.media_type === "document")
 
     if (hasAudio) filledCount++
     if (hasPhoto) filledCount++
@@ -101,7 +112,11 @@ export async function GET(
 
     return NextResponse.json({
       profile: artistProfile,
-      artist,
+      artist: {
+        ...artist,
+        sub_genres: genres?.map((g) => g.genre) || [],
+        influences: influences?.map((i) => i.influence) || [],
+      },
       media: media || [],
       completionPercentage,
     })
@@ -113,4 +128,3 @@ export async function GET(
     )
   }
 }
-

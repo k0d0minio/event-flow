@@ -29,17 +29,29 @@ export async function PUT(
     }
 
     const body = await request.json()
-    const { display_name, bio, genre } = body
+    const { stage_name, bio_short, bio_long, primary_genre } = body
+
+    // Get artist record
+    const { data: artist } = await supabase
+      .from("artists")
+      .select("id")
+      .eq("profile_id", id)
+      .single()
+
+    if (!artist) {
+      return NextResponse.json({ error: "Artist not found" }, { status: 404 })
+    }
 
     // Update artist record
     const { error: artistError } = await supabase
       .from("artists")
       .update({
-        display_name: display_name || null,
-        bio: bio || null,
-        genre: genre || null,
+        stage_name: stage_name || null,
+        bio_short: bio_short || null,
+        bio_long: bio_long || null,
+        primary_genre: primary_genre || null,
       })
-      .eq("id", id)
+      .eq("id", artist.id)
 
     if (artistError) {
       return NextResponse.json(
@@ -57,4 +69,3 @@ export async function PUT(
     )
   }
 }
-

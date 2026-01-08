@@ -28,11 +28,22 @@ export async function DELETE(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
+    // Get artist record
+    const { data: artist } = await supabase
+      .from("artists")
+      .select("id")
+      .eq("profile_id", id)
+      .single()
+
+    if (!artist) {
+      return NextResponse.json({ error: "Artist not found" }, { status: 404 })
+    }
+
     // Delete artist record (cascade will handle related records if configured)
     const { error: artistError } = await supabase
       .from("artists")
       .delete()
-      .eq("id", id)
+      .eq("id", artist.id)
 
     if (artistError) {
       return NextResponse.json(
@@ -50,4 +61,3 @@ export async function DELETE(
     )
   }
 }
-

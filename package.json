@@ -17,14 +17,10 @@
     "marketing:build": "turbo run build --filter=@ef/marketing",
     "admin:dev": "turbo run dev --filter=@ef/admin",
     "admin:build": "turbo run build --filter=@ef/admin",
-    "booker:dev": "turbo run dev --filter=@ef/booker",
-    "booker:build": "turbo run build --filter=@ef/booker",
+    "platform:dev": "turbo run dev --filter=@ef/platform",
+    "platform:build": "turbo run build --filter=@ef/platform",
     "storybook:dev": "turbo run dev --filter=@sustentus/storybook",
     "storybook:build": "turbo run build --filter=@sustentus/storybook",
-    "artist:dev": "turbo run dev --filter=@ef/artist",
-    "artist:build": "turbo run build --filter=@ef/artist",
-    "venue:dev": "turbo run dev --filter=@ef/venue",
-    "venue:build": "turbo run build --filter=@ef/venue",
     "ui:build": "turbo run build --filter=@ef/ui",
     "ui:dev": "turbo run dev --filter=@ef/ui",
     "services:build": "turbo run build --filter=@ef/services",
@@ -32,6 +28,7 @@
     "email:dev": "pnpm --filter @ef/services email:dev",
     "packages:build": "turbo run build --filter=@ef/ui --filter=@ef/services --filter=@ef/db",
     "packages:dev": "turbo run dev --filter=@ef/ui --filter=@ef/services --filter=@ef/db",
+    "db:seed": "tsx supabase/scripts/seed_database.ts",
     "prepare": "husky"
   },
   "engines": {
@@ -40,8 +37,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@supabase/supabase-js": "^2.84.0",
     "depcheck": "^1.4.7",
     "husky": "^9.1.7",
+    "tsx": "^4.8.1",
     "turbo": "^2.6.1",
     "typescript": "catalog:"
   },

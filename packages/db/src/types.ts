@@ -14,68 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      artists: {
-        Row: {
-          bio: string | null
-          created_at: string
-          display_name: string | null
-          genre: string | null
-          id: string
-          updated_at: string
-        }
-        Insert: {
-          bio?: string | null
-          created_at?: string
-          display_name?: string | null
-          genre?: string | null
-          id: string
-          updated_at?: string
-        }
-        Update: {
-          bio?: string | null
-          created_at?: string
-          display_name?: string | null
-          genre?: string | null
-          id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "artists_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      profiles: {
-        Row: {
-          artist_data: Json | null
-          created_at: string
-          id: string
-          role: string
-          updated_at: string
-          venue_data: Json | null
-        }
-        Insert: {
-          artist_data?: Json | null
-          created_at?: string
-          id: string
-          role: string
-          updated_at?: string
-          venue_data?: Json | null
-        }
-        Update: {
-          artist_data?: Json | null
-          created_at?: string
-          id?: string
-          role?: string
-          updated_at?: string
-          venue_data?: Json | null
-        }
-        Relationships: []
-      }
       artist_media: {
         Row: {
           artist_id: string
@@ -120,6 +58,65 @@ export type Database = {
           },
         ]
       }
+      artists: {
+        Row: {
+          bio: string | null
+          created_at: string
+          display_name: string | null
+          genre: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          genre?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          genre?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "artists_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          artist_data: Json | null
+          created_at: string
+          id: string
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          artist_data?: Json | null
+          created_at?: string
+          id: string
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          artist_data?: Json | null
+          created_at?: string
+          id?: string
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       venues: {
         Row: {
           address: string | null
@@ -160,7 +157,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
+      is_venue: { Args: never; Returns: boolean }
     }
     Enums: {
       media_type: "audio" | "photo" | "video" | "document"
